@@ -1,0 +1,7 @@
+**/node_modules/
+08-entregable/.env
+**/.env.development
+**/.env.production
+/proyecto
+/client-shopfast
+/**/**/node_modules
