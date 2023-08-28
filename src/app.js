@@ -15,21 +15,8 @@ import MocksRouter from './routes/customRouter/MocksRouter.js'
 import { addLogger, customLogger } from './config/logger.js'
 import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerUIExpress from 'swagger-ui-express'
-import cluster from 'cluster'
-import { cpus } from 'os'
 import { faker } from '@faker-js/faker'
 
-if (cluster.isPrimary) {
-  customLogger.info('Primary process, generating workers')
-  for (let i = 0; i < cpus().length; i++) {
-    cluster.fork()
-  }
-  cluster.on('exit', worker => {
-    customLogger.error(`workeer ${worker.process.pid} has gone`)
-    cluster.fork()
-  })
-} else {
-  customLogger.info(`worker initialized id: ${process.pid}`)
 
   const app = express()
   // SETTINGS
@@ -123,4 +110,4 @@ if (cluster.isPrimary) {
   })
   // Data base connection
   ConnectionToMDB.getInstance()
-}
+  
