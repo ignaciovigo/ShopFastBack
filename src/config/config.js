@@ -15,7 +15,7 @@ export default {
   CALLBACK_URL: process.env.CALLBACK_URL,
   PRIVATE_KEY: process.env.PRIVATE_KEY,
   SECRET_COOKIE: process.env.SECRET_COOKIE,
-  PORT: process.env.PORT,
+  PORT: process.env.PORT ?? 8080,
   URL_REACT_APP: process.env.URL_REACT_APP,
   NODEMAILER: process.env.NODEMAILER,
   EMAIL: process.env.EMAIL,
