@@ -25,7 +25,8 @@ export async function loginUser (req, res) {
     res
       .cookie('jwtCookie', accessToken, {
         maxAge: 3600000,
-        httpOnly: true
+        httpOnly: true,
+        path: '/'
       })
       .sendSuccessInfo('Login successfully')
   } catch (error) {
