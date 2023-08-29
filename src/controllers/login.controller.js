@@ -28,7 +28,7 @@ export async function loginUser (req, res) {
         maxAge: 3600000,
         httpOnly: true,
         secure: true,
-        sameSite: 'none'
+        sameSite: 'None'
       })
       .sendSuccessInfo('Login successfully')
   } catch (error) {
