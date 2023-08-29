@@ -30,7 +30,7 @@ export async function loginUser (req, res) {
         path: '/',
         secure: true,
         domain: `.${config.URL_REACT_APP}`,
-        sameSite: 'none'
+        sameSite: 'None'
       })
       .sendSuccessInfo('Login successfully')
   } catch (error) {
