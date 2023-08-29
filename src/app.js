@@ -38,7 +38,7 @@ import { faker } from '@faker-js/faker'
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
   app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: config.URL_REACT_APP,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type,Authorization',
     credentials: true
@@ -110,4 +110,4 @@ import { faker } from '@faker-js/faker'
   })
   // Data base connection
   ConnectionToMDB.getInstance()
-  
+
