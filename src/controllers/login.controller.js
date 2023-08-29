@@ -1,3 +1,4 @@
+import config from '../config/config.js'
 import { cartService, userService } from '../services/repositories/index.js'
 import { generateToken, isValidPassword } from '../utils.js'
 
@@ -26,7 +27,10 @@ export async function loginUser (req, res) {
       .cookie('jwtCookie', accessToken, {
         maxAge: 3600000,
         httpOnly: true,
-        path: '/'
+        path: '/',
+        secure: true,
+        domain: `.${config.URL_REACT_APP}`,
+        sameSite: 'none'
       })
       .sendSuccessInfo('Login successfully')
   } catch (error) {
