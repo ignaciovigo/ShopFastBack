@@ -37,7 +37,12 @@ import { faker } from '@faker-js/faker'
   // to json
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
-  app.use(cors())
+  app.use(cors({
+    origin: config.URL_REACT_APP,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true
+  }))
   app.use(compresssion())
   // to cookies
   app.use(cookieParser(config.SECRET_COOKIE))
