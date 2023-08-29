@@ -21,7 +21,7 @@ const patterns = {
 }
 
 function getLink (req, result, finalWordEndpoint) {
-  let link = req.protocol + '://' + req.get('host') + req.originalUrl
+  let link = req.protocol + 's://' + req.get('host') + req.originalUrl
   const indexOfString = link.indexOf(finalWordEndpoint)
   if (!link.includes('page')) {
     switch (link.substring(indexOfString)) {
