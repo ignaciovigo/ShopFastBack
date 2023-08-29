@@ -26,11 +26,7 @@ export async function loginUser (req, res) {
     res
       .cookie('jwtCookie', accessToken, {
         maxAge: 3600000,
-        httpOnly: true,
-        path: '/',
-        secure: true,
-        domain: `.${config.URL_REACT_APP}`,
-        sameSite: 'None'
+        httpOnly: true
       })
       .sendSuccessInfo('Login successfully')
   } catch (error) {
