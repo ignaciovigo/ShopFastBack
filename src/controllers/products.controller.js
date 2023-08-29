@@ -76,7 +76,7 @@ export async function deleteProduct (req, res) {
     if (!search) return res.sendUserError('Product not found')
     const result = await productService.deleteProductById(pid)
     if (!result) return res.sendUserError('Product not found')
-    if (search.owner !== config.ADMIN_GMAIL_ACC) {
+    if (search.owner && search.owner !== config.ADMIN_GMAIL_ACC ) {
       const mail = {
         from: 'Test',
         to: search.owner,
