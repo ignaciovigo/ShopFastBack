@@ -58,7 +58,7 @@ export async function loginWithGitHub (req, res) {
       httpOnly: true,
       secure: true,
       sameSite: 'None'
-    }).redirect(`${config.URL_REACT_APP}`)
+    }).redirect(`${config.URL_REACT_APP}/products`)
   } catch (error) {
     res.sendServerError(error.message)
   }
