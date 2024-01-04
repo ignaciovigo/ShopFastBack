@@ -51,14 +51,14 @@ export async function logoutUser (req, res) {
 
 export async function loginWithGitHub (req, res) {
   try {
-    const { id } = await cartService.createCart()
-    req.user.cartId = id
     req.logger.info('req user from callback git', req.user)
     const accessToken = generateToken(req.user)
     res.cookie('jwtCookie', accessToken, {
       maxAge: 3600000,
-      httpOnly: true
-    }).redirect('/products')
+      httpOnly: true,
+      secure: true,
+      sameSite: 'None'
+    }).redirect(`${config.URL_REACT_APP}/products`)
   } catch (error) {
     res.sendServerError(error.message)
   }

@@ -2,7 +2,7 @@ import passport from 'passport'
 import Github from 'passport-github2'
 import jwtStrategy from 'passport-jwt'
 import config from '../config/config.js'
-import { userService } from '../services/repositories/index.js'
+import { cartService, userService } from '../services/repositories/index.js'
 import { customLogger } from '../config/logger.js'
 // function to extract the token from the http request and decoded it
 const ExtractJWT = jwtStrategy.ExtractJwt
@@ -39,14 +39,15 @@ const initializePassport = () => {
           // checks if the user has github Id
           if (user.githubId) {
             customLogger.info(`The user has GitHubID ${user}`)
-            return done(null, user)
+            return done(null, { ...user })
           } else {
             // if the user has already registered before and is joinning for the first time with github
             const userUpdated = await userService.updateUser({ email: profile._json.email, updates: { githubId: profile.id } })
             customLogger.info(`User already registered before ${userUpdated}`)
-            return done(null, userUpdated)
+            return done(null, { ...userUpdated })
           }
         } else {
+          const cartId = await cartService.createCart()
           // if the user has no account
           const newUser = {
             firstName: profile.name,
@@ -54,12 +55,13 @@ const initializePassport = () => {
             lastName: undefined,
             email: profile._json.email,
             age: undefined,
-            githubId: profile.id
+            githubId: profile.id,
+            cartId: cartId.id
           }
           const result = await userService.register(newUser)
           if (!result) return done('Could not access with github account', false)
           customLogger.info(`The user never has an account ${result}`)
-          return done(null, result)
+          return done(null, { ...result })
         }
       } catch (error) {
         customLogger.warning(`Error to join with github. reason : ${error.message}`)
